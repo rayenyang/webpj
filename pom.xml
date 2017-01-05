@@ -8,16 +8,42 @@
   <name>webpj Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
+
+    <!--Spring相关依赖-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>4.3.0.RELEASE</version>
+    </dependency>
+
+    <!--jackson-->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.7.5</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.7.5</version>
+    </dependency>
+    <!--servlet-->
     <dependency>
       <groupId>javax</groupId>
-      <artifactId>javaee-api</artifactId>
+      <artifactId>javaee-web-api</artifactId>
       <version>7.0</version>
       <scope>provided</scope>
+    </dependency>
+    <!--测试相关-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>4.1.7.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>4.12</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -27,11 +53,21 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.5.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
         <version>2.6</version>
         <configuration>
           <failOnMissingWebXml>true</failOnMissingWebXml>
-          <resourceEncoding>utf-8</resourceEncoding>
+          <resourceEncoding>UTF-8</resourceEncoding>
         </configuration>
       </plugin>
       <!--tomcat7 plugin-->
@@ -40,11 +76,19 @@
         <artifactId>tomcat7-maven-plugin</artifactId>
         <version>2.2</version>
         <configuration>
-          <charset>utf-8</charset>
-          <uriEncoding>utf-8</uriEncoding>
+          <charset>UTF-8</charset>
+          <uriEncoding>UTF-8</uriEncoding>
           <port>8080</port>
           <path>/webpj</path>
         </configuration>
+          <executions>
+              <execution>
+              <phase>package</phase>
+              <goals>
+                <goal>run</goal>
+              </goals>
+              </execution>
+          </executions>
       </plugin>
     </plugins>
   </build>
