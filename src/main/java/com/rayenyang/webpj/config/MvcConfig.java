@@ -28,7 +28,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter{
     @Bean
     public ViewResolver viewResolver(){
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setContentType("text/html;charset=utf-8");
+        viewResolver.setContentType("text/html;charset=UTF-8");
         viewResolver.setPrefix("/WEB-INF/views/");
         viewResolver.setSuffix(".jsp");
         viewResolver.setExposeContextBeansAsAttributes(true);
@@ -39,10 +39,10 @@ public class MvcConfig extends WebMvcConfigurerAdapter{
     public HttpMessageConverter mappingJackson2HttpMessageConverter(){
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
         List<MediaType> mediaTypeList = new LinkedList<>();
-        mediaTypeList.add(MediaType.parseMediaType("application/json;charset=utf-8"));
-        mediaTypeList.add(MediaType.parseMediaType("text/html;charset=utf-8"));
-        mediaTypeList.add(MediaType.parseMediaType("text/plain;charset=utf-8"));
-        mediaTypeList.add(MediaType.parseMediaType("text/json;charset=utf-8"));
+        mediaTypeList.add(MediaType.parseMediaType("application/json;charset=UTF-8"));
+        mediaTypeList.add(MediaType.parseMediaType("text/html"));
+        mediaTypeList.add(MediaType.parseMediaType("text/plain;charset=UTF-8"));
+        mediaTypeList.add(MediaType.parseMediaType("text/json;charset=UTF-8"));
         converter.setSupportedMediaTypes(mediaTypeList);
         return converter;
     }
