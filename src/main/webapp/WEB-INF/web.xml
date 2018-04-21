@@ -4,6 +4,22 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 		  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
+
+    <context-param>
+        <param-name>spring.profiles.active</param-name>
+        <param-value>dev</param-value>
+    </context-param>
+    <session-config>
+        <!--设置session有效期，单位为分钟-->
+        <session-timeout>30</session-timeout>
+        <cookie-config>
+            <!--禁止javascript读取-->
+            <http-only>true</http-only>
+        </cookie-config>
+        <!--追踪sessionId的方式-->
+        <tracking-mode>COOKIE</tracking-mode>
+        <tracking-mode>URL</tracking-mode>
+    </session-config>
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

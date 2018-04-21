@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rayenyang.webpj.mapper.UserMapper">
+    <insert id="insert">
+        <selectKey keyProperty="userId" resultType="int" order="AFTER">
+            SELECT last_insert_id();
+        </selectKey>
+        INSERT INTO t_user(user_name, credits, password, last_visit, last_ip)
+        VALUES (#{userName},#{credits},#{password},#{lastVisit},#{lastIp})
+    </insert>
+
+    <select id="selectUser" resultMap="userResultMap">
+        SELECT *
+        FROM t_user
+        WHERE user_name LIKE #{name}
+    </select>
+
+    <select id="listUser" resultMap="userResultMap">
+        SELECT *
+        FROM t_user
+    </select>
+
+    <select id="selectUserInfoById" resultMap="userInfoMap">
+        SELECT
+            u.user_name,
+            l.ip
+        FROM t_user u LEFT OUTER JOIN t_login_log l ON l.user_id = u.user_id
+        WHERE u.user_id=1
+        ORDER BY l.login_time LIMIT 1;
+    </select>
+
+    <resultMap id="userInfoMap" type="com.rayenyang.webpj.entity.user.UserInfo">
+        <id property="userId" column="user_id"/>
+        <result property="name" column="user_name"/>
+        <result property="loginIp" column="ip"/>
+    </resultMap>
+
+    <resultMap id="userResultMap" type="com.rayenyang.webpj.entity.user.User">
+        <id property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="password" column="password"/>
+        <result property="credits" column="credits"/>
+        <result property="lastVisit" column="last_visit"/>
+        <result property="lastIp" column="last_ip"/>
+    </resultMap>
+    
+    <resultMap id="loginLogMap" type="com.rayenyang.webpj.entity.log.LoginLog">
+        <id property="loginLogId" column="login_log_id"/>
+        <result property="ip" column="last_ip"/>
+        <result property="loginTime" column="login_time"/>
+    </resultMap>
+</mapper>
